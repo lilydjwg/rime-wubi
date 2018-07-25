@@ -9,7 +9,6 @@ schema:
     - 發明人 王永民先生
   description: |
     五筆字型86版
-    碼表源自 ibus-table
     敲 z 鍵進入拼音反查
   dependencies:
     - luna_pinyin
@@ -22,6 +21,9 @@ switches:
     states: [ 半角, 全角 ]
   - name: extended_charset
     states: [ 常用, 增廣 ]
+  - name: zh_trad
+    reset: 0
+    states: [ 简体, 繁體 ]
   - name: ascii_punct
     states: [ 。，, ．， ]
 
@@ -45,6 +47,9 @@ engine:
     - punct_translator
     - reverse_lookup_translator
     - table_translator
+  filters:
+    - simplifier
+    - uniquifier
 
 speller:
   delimiter: " ;'"
@@ -53,10 +58,6 @@ speller:
 translator:
   dictionary: wubi86
   enable_charset_filter: true
-  enable_sentence: true
-  enable_encoder: true
-  encode_commit_history: true
-  max_phrase_length: 4
   disable_user_dict_for_patterns:
     - "^z.*$"
 
@@ -69,6 +70,10 @@ reverse_lookup:
     - xform/([nl])v/$1ü/
     - xform/([nl])ue/$1üe/
     - xform/([jqxy])v/$1u/
+
+simplifier:
+  opencc_config: s2t.json
+  option_name: zh_trad
 
 punctuator:
   import_preset: default
