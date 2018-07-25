@@ -12,7 +12,7 @@ schema:
     碼表源自 ibus-table
     敲 z 鍵進入拼音反查
   dependencies:
-    - pinyin_simp
+    - luna_pinyin
 
 switches:
   - name: ascii_mode
@@ -48,7 +48,7 @@ engine:
 
 speller:
   delimiter: " ;'"
-  #max_code_length: 4
+  max_code_length: 4
 
 translator:
   dictionary: wubi86
@@ -61,7 +61,7 @@ translator:
     - "^z.*$"
 
 reverse_lookup:
-  dictionary: pinyin_simp
+  dictionary: luna_pinyin
   prefix: "z"
   suffix: "'"
   tips: 〔拼音〕
